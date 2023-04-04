@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="{{ url_for('static', filename='img/Logo.png') }}">
+    <title>Discussions - ForWeb</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+</head>
+<body>
+<style type="text/css">
+a { text-decoration: none;
+    color: black;}
+#titulo {
+    font-size: 60px;
+}
+</style>
+    <nav class="navbar navbar-dark bg-dark">
+        <div class="container">
+            <h1><a class="navbar-brand" id="titulo" >ForWeb</a></h1>
+            <div  class="form-inline">
+                <div class="input-group">
+                    <a href="{{url_for('userConfig')}}"><img  src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava{{icon}}.webp" alt="avatar"
+              class="rounded-circle img-fluid" style="width: 50px; border: 2px solid #FFFFFF;">
+                        </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <div class="container my-3">
+        <div class="row">
+            <div class="col-12 col-xl-9">
+                <h2 class="h4 text-white bg-info mb-0 p-4 rounded-top"><a href="category.html" class="text-white">DISCUSSIONS</a></h2>
+                <table class="table table-stripped table-bordered table-responsive" id="dForum">
+                    <thead class="thead-light">
+                        <tr>
+                            <th class="forum-col" scope="col">Forum</th>
+                            <th scope="col">Posts</th>
+                            <th class="last-post-col" scope="col">Created</th>
+                        </tr>
+                    </thead>
+                    {% for i in discussion %}
+                        <tbody>
+                        <tr>
+                            <td>
+                                <h3 class="h5 mb-0"><a  class="text-uppercase" href="{{url_for('viewTopics', id = i[0])}}">{{i[1]}}</a></h3>
+                                <p class="mb-0">{{i[3]}}</p>
+                            </td>
+                            <td>
+                                <div>{{nDiscussions[i[0]-1]}}</div>
+                            </td>
+                            <td>
+                                <h4 class="h6 mb-0 font-weight-bold"></h4>
+                                <div>by <b>{{i[2]}}</b></div>
+                                <small>{{i[4]}}</small>
+                            </td>
+
+                        </tr>
+                    </tbody>
+                    {% endfor %}
+                </table>
+                <nav aria-label="Page navigation example">
+                  <ul class="pagination justify-content-center">
+                    {% for i in range(0, n) %}
+                    <li class="page-item"><a class="page-link" href="{{url_for('ForWeb', id = i+1)}}">{{i+1}}</a></li>
+                    {% endfor %}
+                  </ul>
+                </nav>
+
+
+
+
+            </div>
+            <div class="col-12 col-xl-3">
+                <aside>
+                    <div class="row">
+
+                        <div class="col-12 col-sm-6 col-xl-12">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h2 class="h4 card-title">Forum statistics</h2>
+
+                                    <div class="card-footer">
+                                    <dl class="row mb-0">
+                                        <dt class="col-8">Total forums: </dt>
+                                        <dd class="col-4 mb-0">{{totalDisussions}}</dd>
+                                    </dl>
+                                    <dl class="row mb-0">
+                                        <dt class="col-8">Total members: </dt>
+                                        <dd class="col-4 mb-0"> {{users}}</dd>
+                                    </dl>
+                                </div>
+                                <div  class="form-inline mt-3 mx-4">
+                                    <div class="input-group">
+                                        <button class="rounded-0 btn btn-primary input-group-append"><a style="color:white" href="{{url_for('newTopic')}}">Add new discussions</a></button>
+                                    </div>
+                                </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </aside>
+            </div>
+        </div>
+    </div>
+    <footer class="big bg-dark text-white">
+        <div class="container py-4">
+            <ul class="list-inline mb-0 text-center">
+                <li class="list-inline-item">&copy; 2022 Callgoredeveloper, Inc</li>
+                <li class="list-inline-item">All rights reserved.</li>
+            </ul>
+        </div>
+    </footer>
+</body>
+</html>

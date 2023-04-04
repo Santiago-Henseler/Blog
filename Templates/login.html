@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+	<link rel="icon" href="{{ url_for('static', filename='img/Logo.png') }}">
+	<title>Login - ForWeb</title>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+<body class="my-login-page">
+	<section class="h-100 ">
+		<div class="container h-100 ">
+			<div class="row justify-content-md-center h-100 pt-5">
+				<div class="card-wrapper">
+					<div class="brand" id="brand">
+						<p></p>
+					</div>
+					<div class="card fat pl-5 pr-5 pt-3 pb-3">
+						<div class="card-body">
+							<h4 class="card-title font-weight-bold pb-4">Login to ForWeb</h4>
+							<form method="POST" action="/inicioSesion" class="my-login-validation" >
+								<input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+								<div class="form-group">
+									<label for="User" class="text-secondary"><u>User</u></label>
+									<input id="User"  type="text" class="form-control " name="User" placeholder="Insert user..." required >
+								</div>
+
+								<div class="form-group">
+                                    <label for="Password" class="text-secondary"><u>Password</u></label>
+									<input id="password" type="password" class="form-control" name="password" placeholder="Insert password..." required>
+								    <div class="invalid-feedback">
+								    	<!--Password is required-->
+							    	</div>
+								</div>
+
+								<div class="form-group m-0">
+									<button type="submit" class="btn btn-primary btn-block">
+										Login
+									</button>
+								</div>
+
+							</form>
+							{% with message = get_flashed_messages() %}
+								{% if message[0] == "User was created successfully!" %}
+									<div  class="alert alert-success mt-3" role="alert" >
+												{{message[0]}}
+									</div>
+								{% endif %}
+								{% if message[0] == "User or password was invalid!" %}
+									<div  class="alert alert-danger mt-3" role="alert" >
+												{{message[0]}}
+									</div>
+								{% endif %}
+								{% if message[0] == "You logout successfully!" %}
+									<div  class="alert alert-warning mt-3" role="alert" >
+												{{message[0]}}
+									</div>
+								{% endif %}
+							{% endwith %}
+						</div>
+						<div class="mt-1 text-center">
+							Don't have an account? <a href="{{url_for('register')}}">Create One</a>
+						</div>
+					</div>
+                </div>
+			</div>
+		</div>
+	</section>
+</body>
+</html>

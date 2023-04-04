@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+	<link rel="icon" href="{{ url_for('static', filename='img/Logo.png') }}">
+	<title>Register - ForWeb</title>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+<body class="my-login-page">
+	<section class="h-100">
+		<div class="container h-100">
+			<div class="card-wrapper">
+				<div class="brand">
+
+				</div>
+			</div>
+			<div class="row justify-content-md-center h-100 pt-5">
+					<div class="card fat pl-5 pr-5 pt-2 pb-3">
+						<div class="card-body">
+							<h4 class="card-title font-weight-bold pb-2">Register to ForWeb</h4>
+							<form method="POST" action="/oRegister" class="my-login-validation" novalidate="">
+								<input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+								<div class="form-group">
+									<label for="User" class="text-secondary"><u>User</u></label>
+									<input id="User" type="text" class="form-control" name="User" placeholder="Insert user..." required >
+									<div class="invalid-feedback">
+										What's your user?
+									</div>
+								</div>
+
+								<div class="form-group">
+									<label for="email" class="text-secondary"><u>E-Mail Address</u></label>
+									<input id="email" type="email" class="form-control" name="email" placeholder="Insert e-mail..." required>
+									<div class="invalid-feedback">
+										Your email is invalid
+									</div>
+								</div>
+
+								<div class="form-group">
+									<label for="password" class="text-secondary"><u>Password</u></label>
+									<input id="password" type="password" class="form-control" name="password" placeholder="Insert password..." required>
+									<div class="invalid-feedback">
+										Password is required
+									</div>
+								</div>
+
+								<div class="form-group m-0">
+									<button type="submit" class="btn btn-primary btn-block">
+										Register
+									</button>
+								</div>
+								<div class="mt-4 text-center">
+									Already have an account? <a href="{{url_for('inicio')}}">Login</a>
+								</div>
+							</form>
+							{% with message = get_flashed_messages() %}
+								{% if message %}
+									<div  class="alert alert-danger mt-3" role="alert" >
+										{{message[0]}}
+									</div>
+								{% endif %}
+							{% endwith %}
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</div>
+	</section>
+
+</body>
+</html>
